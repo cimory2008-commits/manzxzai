@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const HF_TOKEN = "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";
+  const HF_TOKEN = process.env.HF_TOKEN;
   const MODEL = "swiss-ai/Apertus-8B-Instruct-2509:publicai";
 
   const { messages } = req.body;
