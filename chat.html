@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat - ManzxzAi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="https://media.base44.com/images/public/69f8aa3de2b02f40bfcd8662/ad7cf74a8_ChatGPTImage4Mei2026222903.png" />
+  <!-- Icons CDN (works on all hosting) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="chat-body">
+  <div class="chat-layout">
+    <!-- Sidebar -->
+    <aside class="chat-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="nav-brand">
+          <img src="https://media.base44.com/images/public/69f8aa3de2b02f40bfcd8662/ad7cf74a8_ChatGPTImage4Mei2026222903.png" alt="Logo" class="nav-logo" />
+          <div>
+            <div class="brand-name">Manzxz<span class="accent">Ai</span></div>
+            <div class="brand-sub">AI Assistant</div>
+          </div>
+        </div>
+        <button class="btn-new-chat" onclick="newChat()"><i class="fas fa-plus"></i> New Chat</button>
+      </div>
+      <div class="sidebar-history" id="history">
+        <p class="history-empty"><i class="fas fa-comment-slash"></i><br>Belum ada percakapan</p>
+      </div>
+      <div class="sidebar-footer">
+        <span class="online-dot"></span> ManzxzAi online
+      </div>
+    </aside>
+
+    <!-- Main Chat -->
+    <main class="chat-main">
+      <!-- Top Bar -->
+      <div class="chat-topbar">
+        <button class="icon-btn mobile-menu" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <span class="topbar-title mobile-only">Manzxz<span class="accent">Ai</span></span>
+        <a href="index.html" class="icon-btn" title="Beranda"><i class="fas fa-home"></i></a>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat-messages" id="messages">
+        <!-- Welcome Screen -->
+        <div class="welcome" id="welcome">
+          <div class="welcome-logo">
+            <img src="https://media.base44.com/images/public/69f8aa3de2b02f40bfcd8662/ad7cf74a8_ChatGPTImage4Mei2026222903.png" alt="ManzxzAi" />
+          </div>
+          <h1>Halo! Saya <span class="accent">ManzxzAi</span></h1>
+          <p>AI assistant canggih yang siap membantu Anda dengan pertanyaan apa pun.</p>
+          <div class="suggestions">
+            <button class="suggestion-btn" onclick="sendSuggestion(this)">
+              <i class="fas fa-code" style="color:#60a5fa"></i>
+              <span>Buatkan fungsi JavaScript untuk sorting array secara efisien</span>
+            </button>
+            <button class="suggestion-btn" onclick="sendSuggestion(this)">
+              <i class="fas fa-book" style="color:#c084fc"></i>
+              <span>Jelaskan bagaimana cara kerja neural network</span>
+            </button>
+            <button class="suggestion-btn" onclick="sendSuggestion(this)">
+              <i class="fas fa-lightbulb" style="color:#fbbf24"></i>
+              <span>Berikan 5 ide bisnis online modal kecil</span>
+            </button>
+            <button class="suggestion-btn" onclick="sendSuggestion(this)">
+              <i class="fas fa-chart-bar" style="color:#34d399"></i>
+              <span>Cara menganalisis data penjualan yang baik</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="chat-input-wrap">
+        <div class="chat-input-box">
+          <textarea id="chatInput" placeholder="Ketik pesan Anda..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <p class="input-hint"><kbd>Enter</kbd> kirim · <kbd>Shift+Enter</kbd> baris baru · Powered by ManzxzAi</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>
