@@ -7,20 +7,50 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const HF_TOKEN = process.env.HF_TOKEN;
-  const MODEL = "swiss-ai/Apertus-8B-Instruct-2509:publicai";
+  try {
+    const HF_TOKEN = process.env.HF_TOKEN;
 
-  const { messages } = req.body;
+    if (!HF_TOKEN) {
+      return res.status(500).json({
+        error: "HF_TOKEN tidak ditemukan di environment Vercel",
+      });
+    }
 
-  const response = await fetch("https://router.huggingface.co/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${HF_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ model: MODEL, messages }),
-  });
+    const MODEL = "swiss-ai/Apertus-8B-Instruct-2509:publicai";
 
-  const data = await response.json();
-  res.status(200).json(data);
+    const body = typeof req.body === "string"
+      ? JSON.parse(req.body)
+      : req.body;
+
+    const messages = body?.messages || [];
+
+    const response = await fetch(
+      "https://router.huggingface.co/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${HF_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          messages,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json({
+        error: data,
+      });
+    }
+
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message,
+    });
+  }
 }
