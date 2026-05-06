@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const MODEL = "swiss-ai/Apertus-8B-Instruct-2509:publicai";
+    const MODEL = "mistralai/Mistral-7B-Instruct-v0.2";
 
     const body = typeof req.body === "string"
       ? JSON.parse(req.body)
